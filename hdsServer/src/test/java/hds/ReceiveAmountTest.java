@@ -61,7 +61,7 @@ public class ReceiveAmountTest {
 	    	
 	    	server.receive_amount(keyS1, id); //transfer id?
 	    	newbalance = acc1.getBalance();
-	    	assertTrue(balance == newbalance-100);
+	    	assertEquals(balance, newbalance-100,0);
 	    }
 		
 		

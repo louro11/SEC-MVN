@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="hds.SendAmountTest" time="0.019" tests="14" errors="0" skipped="0" failures="0">
+<testsuite name="hds.SendAmountTest" time="0.033" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
@@ -62,16 +62,16 @@
   </properties>
   <testcase name="insuficientFunds" classname="hds.SendAmountTest" time="0"/>
   <testcase name="zeroAmount" classname="hds.SendAmountTest" time="0.001"/>
-  <testcase name="sendAmountToUnregisteredUser" classname="hds.SendAmountTest" time="0"/>
-  <testcase name="nullDestinatary" classname="hds.SendAmountTest" time="0"/>
-  <testcase name="transferInListFlowOK" classname="hds.SendAmountTest" time="0.001"/>
-  <testcase name="sendAmountFromUnregisteredUser" classname="hds.SendAmountTest" time="0"/>
-  <testcase name="decimalCoinsFlowOK" classname="hds.SendAmountTest" time="0"/>
-  <testcase name="coinsFlowOK" classname="hds.SendAmountTest" time="0.005"/>
+  <testcase name="sendAmountToUnregisteredUser" classname="hds.SendAmountTest" time="0.001"/>
+  <testcase name="nullDestinatary" classname="hds.SendAmountTest" time="0.004"/>
+  <testcase name="transferInListFlowOK" classname="hds.SendAmountTest" time="0.004"/>
+  <testcase name="sendAmountFromUnregisteredUser" classname="hds.SendAmountTest" time="0.001"/>
+  <testcase name="decimalCoinsFlowOK" classname="hds.SendAmountTest" time="0.002"/>
+  <testcase name="coinsFlowOK" classname="hds.SendAmountTest" time="0.008"/>
   <testcase name="decimalZeroAmount" classname="hds.SendAmountTest" time="0.002"/>
   <testcase name="transferHistoryListFlowOK" classname="hds.SendAmountTest" time="0.002"/>
-  <testcase name="nullAmount" classname="hds.SendAmountTest" time="0.003"/>
-  <testcase name="negativeAmount" classname="hds.SendAmountTest" time="0.002"/>
-  <testcase name="transferOutListFlowOK" classname="hds.SendAmountTest" time="0.002"/>
+  <testcase name="nullAmount" classname="hds.SendAmountTest" time="0.001"/>
+  <testcase name="negativeAmount" classname="hds.SendAmountTest" time="0.003"/>
+  <testcase name="transferOutListFlowOK" classname="hds.SendAmountTest" time="0.003"/>
   <testcase name="nullSender" classname="hds.SendAmountTest" time="0.001"/>
 </testsuite>

@@ -54,54 +54,47 @@ public class SendAmountTest {
 	    	List<Transfer> transfers = new ArrayList<Transfer>();
 	    	CheckResult cr;
 	    	int transferid;
+	    	Transfer t;
 	    	
-	    	client1.sendAmount("client2test123456789REGISTER", 500.0f);
-	    	cr = client1.checkAccount();
-	    	assertEquals(cr.getBalance(), 0.0f, 0);
-	    	
-	    	cr = client2.checkAccount();
-	    	assertEquals(cr.getBalance(), 500f, 0);
-	    	transfers = cr.getTransfersIn();
-	    	Transfer t = transfers.get(transfers.size()-1);	
-	    	transferid = t.getId(); 
-	    	client2.receiveAmount(transferid);
-	    	assertEquals(cr.getBalance(), 1000f, 0);
-	    }
-	    
-	    @Test
-	    public void decimalFlowOk()throws FailToLogRequestException_Exception, InvalidInputException_Exception{
-	    	List<Transfer> transfers = new ArrayList<Transfer>();
-	    	CheckResult cr;
-	    	int transferid;
-	    	client2.sendAmount("client1test123456789REGISTER", 0.5f);
-	    	cr = client2.checkAccount();
-	    	assertEquals(cr.getBalance(), 999.5f, 0);
-	    	
-	    	cr = client1.checkAccount();
-	    	assertEquals(cr.getBalance(), 0.0f, 0);
-	    	transfers = cr.getTransfersIn();
-	    	Transfer t = transfers.get(transfers.size()-1);	
-	    	transferid = t.getId(); 
-	    	client1.receiveAmount(transferid);
-	    	assertEquals(cr.getBalance(), 0.5f, 0);
-	    }
-	    
-	    @Test
-	    public void  transferInListOK() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
-	    	List<Transfer> transfers = new ArrayList<Transfer>();
-	    	CheckResult cr;
-	    	client2.sendAmount("client1test123456789REGISTER", 2);
-	    	
-	    	cr = client2.checkAccount();
-	    	transfers = cr.getTransfersIn();
-	    	assertEquals(true, transfers.isEmpty());
-	    	
-	    	cr = client1.checkAccount();
-	    	transfers=cr.getTransfersIn();
-	    	assertEquals(false, transfers.isEmpty());
+	    	//test transfer in one way
+	    	{
+		    	client1.sendAmount("client2test123456789REGISTER", 500.0f);
+		    	cr = client1.checkAccount();
+		    	assertEquals(cr.getBalance(), 0.0f, 0);
+		    	assertEquals(true, cr.getTransfersIn().isEmpty());
+		    	
+		    	cr = client2.checkAccount();
+		    	assertEquals(cr.getBalance(), 500f, 0);
+		    	assertEquals(false, cr.getTransfersIn().isEmpty());
+		    	
+		    	transfers = cr.getTransfersIn();
+		    	t = transfers.get(transfers.size()-1);	
+		    	transferid = t.getId(); 
+		    	client2.receiveAmount(transferid);
+		    	cr = client2.checkAccount();
+		    	assertEquals(cr.getBalance(), 1000f, 0);
+		    	assertEquals(true, cr.getTransfersIn().isEmpty());
+	    	}
+	    	//test transfer in the other way with decimal flow
+	    	{
+		    	client2.sendAmount("client1test123456789REGISTER", 100.5f);
+		    	cr = client2.checkAccount();
+		    	assertEquals(cr.getBalance(), 899.5f, 0);
+		    	
+		    	cr = client1.checkAccount();
+		    	assertEquals(cr.getBalance(), 0.0f, 0);
+		    	assertEquals(false, cr.getTransfersIn().isEmpty());
+		    	
+		    	transfers = cr.getTransfersIn();
+		    	t = transfers.get(transfers.size()-1);	
+		    	transferid = t.getId(); 
+		    	client1.receiveAmount(transferid);
+		    	cr = client1.checkAccount();
+		    	assertEquals(cr.getBalance(), 100.5f, 0);
+		    	assertEquals(true, cr.getTransfersIn().isEmpty());
+	    	}
 	    	
 	    }
-	    
 	    
 	    @Test (expected = InvalidInputException_Exception.class) 
 	    public void sendZeroAmount()throws InvalidInputException_Exception, FailToLogRequestException_Exception{
@@ -114,7 +107,7 @@ public class SendAmountTest {
 	    }
 	    
 	    @Test(expected = InvalidInputException_Exception.class) 
-	    public void  insuficientFunds() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
+	    public void  noFunds() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
 	    	client1.sendAmount("client2test123456789REGISTER", 999999999);
 	    }
 	    
