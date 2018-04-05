@@ -60,9 +60,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="nullReceiver" classname="hds.ReceiveAmountTest" time="0.006"/>
-  <testcase name="negativeIDTransfer" classname="hds.ReceiveAmountTest" time="0.002"/>
-  <testcase name="ok" classname="hds.ReceiveAmountTest" time="0.002"/>
-  <testcase name="receiveWrongDestinationTransfer" classname="hds.ReceiveAmountTest" time="0.003"/>
-  <testcase name="receiveTwiceSameTransfer" classname="hds.ReceiveAmountTest" time="0.002"/>
+  <testcase name="nullReceiver" classname="hds.ReceiveAmountTest" time="0.001"/>
+  <testcase name="negativeIDTransfer" classname="hds.ReceiveAmountTest" time="0.001"/>
+  <testcase name="ok" classname="hds.ReceiveAmountTest" time="0.007"/>
+  <testcase name="receiveWrongDestinationTransfer" classname="hds.ReceiveAmountTest" time="0.001"/>
+  <testcase name="receiveTwiceSameTransfer" classname="hds.ReceiveAmountTest" time="0.005"/>
 </testsuite>

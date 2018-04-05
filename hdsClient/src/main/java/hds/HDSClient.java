@@ -86,11 +86,8 @@ public class HDSClient {
 	
 	public void sendAmount(String username, float amount) throws FailToLogRequestException_Exception, InvalidInputException_Exception{
 		String keyD = getKeyFromUsername(username);
+		
 		putEntityAndNonce();
-		System.out.println("#############");System.out.println("#############");System.out.println("#############");
-		System.out.println("DEST:" + getKeyFromUsername(username));
-		System.out.println("SEND:" + getKeyFromUsername(this.clientUsername));
-		System.out.println("#############");System.out.println("#############");System.out.println("#############");
 		try{
 			hds.sendAmount(getPublicKeyString(), keyD, amount);
 		}catch(WebServiceException e){

@@ -6,7 +6,10 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SendAmountTest {
 	
 		@BeforeClass
@@ -35,6 +38,7 @@ public class SendAmountTest {
 	    	client3.setClientUsername("client3test123456789REGISTER");
 	    	client1.setPublicKeyString(keyS1);
 	    	client2.setPublicKeyString(keyS2);
+	    	client3.setPublicKeyString(keyS3);
 	    	try{
 	    		client1.register();
 	    		client2.register();
@@ -55,6 +59,7 @@ public class SendAmountTest {
 	    	CheckResult cr;
 	    	int transferid;
 	    	Transfer t;
+	    	
 	    	
 	    	//test transfer in one way
 	    	{
@@ -91,14 +96,21 @@ public class SendAmountTest {
 		    	client1.receiveAmount(transferid);
 		    	cr = client1.checkAccount();
 		    	assertEquals(cr.getBalance(), 100.5f, 0);
-		    	assertEquals(true, cr.getTransfersIn().isEmpty());
+		    	assertEquals(true, cr.getTransfersIn().isEmpty());;
 	    	}
 	    	
 	    }
 	    
+	    
+	    
 	    @Test (expected = InvalidInputException_Exception.class) 
 	    public void sendZeroAmount()throws InvalidInputException_Exception, FailToLogRequestException_Exception{
 	    	client1.sendAmount("client2test123456789REGISTER", 0);
+	    }
+	    
+	    @Test (expected = InvalidInputException_Exception.class) 
+	    public void sendToHimself()throws InvalidInputException_Exception, FailToLogRequestException_Exception{
+	    	client1.sendAmount("client1test123456789REGISTER", 10);
 	    }
 	    
 	    @Test (expected = InvalidInputException_Exception.class) 
@@ -107,12 +119,12 @@ public class SendAmountTest {
 	    }
 	    
 	    @Test(expected = InvalidInputException_Exception.class) 
-	    public void  noFunds() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
+	    public void  sendWithnoFunds() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
 	    	client1.sendAmount("client2test123456789REGISTER", 999999999);
 	    }
 	    
 	    @Test(expected = InvalidInputException_Exception.class) 
-	    public void  negativeAmount() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
+	    public void  sendNegativeAmount() throws InvalidInputException_Exception, FailToLogRequestException_Exception  {
 	    	client1.sendAmount("client2test123456789REGISTER", -10);
 	    }
 	    

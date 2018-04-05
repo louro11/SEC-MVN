@@ -9,8 +9,10 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
-
+import org.junit.runners.MethodSorters;
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CheckAccountTest {
 	@BeforeClass
     public static void oneTimeSetUp() {
@@ -90,7 +92,7 @@ public class CheckAccountTest {
     }
     
     @Test(expected = RuntimeException.class) 
-    public void  checkUnregisteredAccount() throws InvalidInputException_Exception, FailToLogRequestException_Exception {
+    public void  unregisteredAccount() throws InvalidInputException_Exception, FailToLogRequestException_Exception {
     	client3.checkAccount();
     }
     

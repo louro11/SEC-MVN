@@ -76,8 +76,13 @@ public class HDSServerImpl implements HDSServer{
 	@Override
 	public void send_amount(String sourceS, String destinationS, float amount) throws InvalidInputException, FailToLogRequestException {
 		
-		if(!verifyPublicKey(sourceS) || !verifyPublicKey(sourceS) || amount == 0.0f)
+		if(!verifyPublicKey(sourceS) || !verifyPublicKey(destinationS) || amount == 0.0f)
 			throw new InvalidInputException("Username, PublicKey or Amount Invalid!");
+		
+		if(sourceS.equals(destinationS)){
+			throw new InvalidInputException("Same source and destination!!");
+		}
+		
 		if(webServiceContext != null)
 			setupResponse();
 		if(amount>0){
@@ -214,6 +219,9 @@ public class HDSServerImpl implements HDSServer{
 	}
 	
 	private boolean verifyPublicKey(String keyS){
+		System.out.println("#####");
+		System.out.println(keyS);
+		System.out.println("#####");
 		if(keyS == null)
 			return false;
 		if(StringToPubliKey(keyS)==null)
